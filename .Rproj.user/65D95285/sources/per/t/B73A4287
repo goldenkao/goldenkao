@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1537964386936.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3530645586",
+    "id" : "B73A4287",
+    "lastKnownWriteTime" : 1537964532,
+    "last_content_update" : 1539766593708,
+    "path" : "D://goldenkao/goldenkao.Rmd",
+    "project_path" : "goldenkao.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "31,61",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
