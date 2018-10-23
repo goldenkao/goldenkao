@@ -1,14 +1,15 @@
-title: "ç·´ç¿’1"
+---
+title: "½m²ß1"
 date: "2018-10-03"
 output: html_document
 params:
-  studentID: 410674238""
-  studentName: "é«˜å˜‰å‘ˆ"
+  studentID: "410674238"
+  studentName: "°ª¹Å§e"
 ---
-å­˜æª”æ™‚ï¼Œè«‹ç”¨ä½ çš„å­¸è™Ÿç•¶å»¶ä¼¸æª”åã€‚ä¾‹å¦‚ï¼šè‹¥ä½ çš„å­¸è™Ÿç‚º41078392ï¼Œå‰‡è«‹`File->Save As...`å­˜æˆExercise1-41078392.Rmdã€‚
+¦sÀÉ®É¡A½Ğ¥Î§Aªº¾Ç¸¹·í©µ¦ùÀÉ¦W¡C¨Ò¦p¡G­Y§Aªº¾Ç¸¹¬°41078392¡A«h½Ğ`File->Save As...`¦s¦¨Exercise1-41078392.Rmd¡C
 
 ## 1
-å¼•å…¥[äº”å¤§éŠ€è¡Œä¸€å€‹æœˆå®šå­˜å›ºå®šåˆ©ç‡æ­·å²æœˆè³‡æ–™](https://raw.githubusercontent.com/tpemartin/github-data/master/bankdata.csv)ã€‚
+¤Ş¤J[¤­¤j»È¦æ¤@­Ó¤ë©w¦s©T©w§Q²v¾ú¥v¤ë¸ê®Æ](https://raw.githubusercontent.com/tpemartin/github-data/master/bankdata.csv)¡C
 
 ```{r}
 library(readr)
@@ -16,22 +17,30 @@ bankdata <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/ma
 ```
 
 ### 1.1
-å°‡**éŠ€è¡Œ**è®Šæ•¸æ”¹æˆfactor
+±N**»È¦æ**ÅÜ¼Æ§ï¦¨factor
 ```{r ans11}
-as.factor(bankdata$éŠ€è¡Œ) 
+as.factor(bankdata$»È¦æ)
 ```
 
 ### 1.2
-å°‡å¹´æœˆæ”¹æˆè¥¿å…ƒå¹´æœˆ
+±N¦~¤ë§ï¦¨¦è¤¸¦~¤ë
 ```{r ans12}
-library(lubridate)
-x <- substr(bankdata$å¹´æœˆ,start=1,stop=3)
-x <- x+1911
+x <- bankdata$¦~¤ë
+library(stringr)
+str_sub(x,1,3)
+y <- str_sub(x,1,3)
+b <- as.numeric(y)
+z <- b+1911
+a <- str_sub(x,4,6)
+bankdata$¦~¤ë <- paste(z,a,sep="")
+
 ```
 
 ## 2
-Googleå¤©ç½åœ°åœ–æœƒç™¼ä½ˆå¤©ç½æ™‚åœ°è³‡è¨Šï¼Œå¦‚[æ½­ç¾é¢±é¢¨(Typhoon Trami)](https://google.org/crisismap/google.com/2018-trami)ï¼Œä½†å®ƒçš„æ™‚é–“æ˜¯ä»¥UTCè¡¨ç¤ºï¼Œå¦‚"2018/30/09 00:00 UTC",è©¦é€é`lubridate::with_tz()`å°‡"2018/30/09 00:00 UTC"è½‰æˆå°ç£æ™‚é–“ã€‚(Hint: å°ç£tzoneå¯ç”¨`grep("Taipei",OlsonNames(),value=TRUE)`æŒ‡ä»¤æŸ¥å¾—)
+Google¤Ñ¨a¦a¹Ï·|µo§G¤Ñ¨a®É¦a¸ê°T¡A¦p[¼æ¬ü»ä­·(Typhoon Trami)](https://google.org/crisismap/google.com/2018-trami)¡A¦ı¥¦ªº®É¶¡¬O¥HUTCªí¥Ü¡A¦p"2018/30/09 00:00 UTC",¸Õ³z¹L`lubridate::with_tz()`±N"2018/30/09 00:00 UTC"Âà¦¨¥xÆW®É¶¡¡C(Hint: ¥xÆWtzone¥i¥Î`grep("Taipei",OlsonNames(),value=TRUE)`«ü¥O¬d±o)
 
 ```{r ans2}
-
+library(lubridate)
+x <- ydm_hms("2018/30/09 00:00:00", tz = "UTC")
+with_tz(x, tzone = "Asia/Taipei")
 ```
