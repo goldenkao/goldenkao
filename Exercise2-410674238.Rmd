@@ -19,8 +19,10 @@ iPeenData <- read_csv("https://raw.githubusercontent.com/tpemartin/course-107-1-
 
 ```{r ans1}
 library(stringr)
-a <- str_remove(x, boundary（"本店均消"))
+ str_remove_all(iPeenData$均消, ""本店均消元" , " " )
+as.numic(iPeenData$r均消)
 ```
+
 
 ## 2 
 引入學生播客競賽投票記錄。
