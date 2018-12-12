@@ -68,11 +68,8 @@ classSurvey$學號%in%hwGrades$學號
 使用`which()`查出學號為"4104d245c7"的學生在**classSurvey**的第幾row。
 
 ```{r ans1b4}
-hwGrades$Exercise3[which(classSurvey$學號=="410674238")]
-
-(hwGrades$學號=="4104d245c7") %>%
-  which()
-{hwGrades}
+a<-"4104d245c7"
+which(classSurvey$學號 == a)
 ```
 
 ### 1.Basic(5)
@@ -141,7 +138,8 @@ hwGrades$交作業次數<-3-rowSums(bb)
 (hint: 使用`rowSums()`)
 
 ```{r ans15}
-rowsum(hwGrades[,c("hw1","hw2","Exercise3")],na.rm = TRUE)
+rowsum(hwGrades[,c("hw1","hw2","Exercise3")],na.rm = TRUE)/3->hwGrades$平均成績
+hwGrades$平均成績<-rowSums(hwGrades[,c(2:4)],na.rm=T)/3
 ```
 
 ## 1.6 誰填了問卷？
@@ -172,6 +170,8 @@ classSurvey$學號[classSurvey$性別=="女"]
 ## 1.9 團隊活動與學業表現：女性
 請由**hwGradesSubsample**中計算女性「有參與」團隊活動的平均**平均成績**值。(最後一行必需出現此平均值) (hint: 可參考1.7來確認**hwGradesSubsample**有誰有參與團隊活動)
 ```{r ans19}
+classSurvey$課外活動[有] -> 有團隊的學號
+hwGradesSubsample$有團活 <- hwGradesSubsample$學號 %in% 有團隊的學號
 ```
 
 > 小知識：資料中女性「沒有參與」團隊活動的成績表現平均高於「有參與」的女性約2.14分；而這差距在男生中只有約1.74分。
@@ -185,21 +185,29 @@ hwSubmit <- read_csv("https://raw.githubusercontent.com/tpemartin/github-data/ma
 ## 2.1 class檢查
 請將**hwSubmit**的所有變數調整成正確的class，其中**Timestamp**為UTC時區，請將它轉成台灣Asia/Taipei時區。（最後一行請打hwSubmit, 程式將檢查裡面所有變數的class是否正確。）
 ```{r ans21}
-
+ymd_hms(hwSubmit$Timestamp)->hwSubmit$Timestamp
+with_tz(hwSubmit$Timestamp,tzone="Asia/Taipei")
+hwSubmit
 ```
 
 ## 2.2 交作業時間: Exercise3
 取出**hwSubmit**中**作業代碼**為Exercise3的子樣本，稱它為**hwSubmit3**。Exercise3的截止時日是台灣時間2018-11-06 00:00:00，請計算每個人該作業離截止時日還有多少小時。（請於**hwSubmit3**中創一個新變數**截止時差**存入每個人的時差小時值，程式最後一行請打hwSubmit3，程式將檢查裡面的**截止時差**是否正確。）(hint: `difftime()`)
 ```{r ans22}
-hwSubmit[(hwSubmit$作業代碼=="Exercise3"),]
 deadline<- ymd_hms("2018-11-06 00:00:00",tz="Asia/Taipei")
-
+hwSubmit3<-hwSubmit[hwSubmit$作業代碼=="Exercise3",]
+hwSubmit3$截止時差<-difftime(deadline,hwSubmit3$Timestamp,units = "hours")
 ```
 
 ## 2.3 性別差異
 **hwSubmit3**中, 女性「平均」截止時差比男性多多少小時呢？（最後一行答案必須女生減去男性的值。）
 
 ```{r ans23}
+hwSubmit3$截止時差[hwSubmit3$女性==T]->girl
+mean(girl) -> FemaleTime
+hwSubmit3$截止時差[hwSubmit3$女性==F]->boy
+mean(boy) -> MaleTime
+FemaleTime-MaleTime -> 相差小時
+相差小時
 ```
 
 > 小知識：第一次作業男性平均早女性7.5小時交，第二次作業早35.5小時。
