@@ -6,3 +6,31 @@ plasticContainer <- list(
 )
 ```
 
+```{r}
+plasticContainer[c("greenBox","redBox")] # or plasticContainer[c(1,2)]
+```
+
+```{r}
+plasticContainer[c("greenBox")] # or plasticContainer[c(1,2)]
+```
+
+```{r}
+plasticContainer[c("greenBox")] # or plasticContainer[c(1,2)]
+```
+
+```{r}
+plasticContainer[["greenBox"]][1]
+```
+
+```{r}
+download.file("https://github.com/tpemartin/github-data/blob/master/plotly_4070_neda.Rda?raw=true",destfile = "plotly_4070_neda.Rda")
+load("plotly_4070_neda.Rda")
+library(plotly)
+plotly_4070_neda
+```
+
+
+
+
+
+
